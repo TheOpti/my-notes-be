@@ -10,13 +10,13 @@ describe('/login endpoint', () => {
       .post('/login')
       .send({ });
 
-    expect(res.statusCode).toEqual(400);
+    expect(res.status).toEqual(400);
     expect(res.body.message).toEqual(REPSONSE_MESSAGES.INCORRECT_DATA);
   });
 
   it('should return 404 when no user is found', async () => {
     jest.spyOn(User, 'findOne')
-      .mockImplementationOnce(() => ({ 
+      .mockImplementationOnce(() => ({
         exec: () => Promise.resolve(null)
       }));
 
@@ -24,7 +24,7 @@ describe('/login endpoint', () => {
       .post('/login')
       .send({ login: 'non-existing', password: 'foo' });
 
-    expect(res.statusCode).toEqual(404);
+    expect(res.status).toEqual(404);
     expect(res.body.message).toEqual(REPSONSE_MESSAGES.NO_USER_WITH_LOGIN);
   });
 
@@ -38,7 +38,7 @@ describe('/login endpoint', () => {
       .post('/login')
       .send({ login: 'doesntMatter', password: 'foo' });
 
-    expect(res.statusCode).toEqual(500);
+    expect(res.status).toEqual(500);
     expect(res.body.message).toEqual(REPSONSE_MESSAGES.SERVER_ERROR);
   });
 
@@ -54,7 +54,7 @@ describe('/login endpoint', () => {
       .post('/login')
       .send({ login: 'user', password: 'otherPassword' });
 
-    expect(res.statusCode).toEqual(400);
+    expect(res.status).toEqual(400);
     expect(res.body.message).toEqual(REPSONSE_MESSAGES.LOGIN_PASS_INCORRECT);
   });
 
@@ -75,7 +75,7 @@ describe('/login endpoint', () => {
       .post('/login')
       .send({ login: 'user', password });
 
-    expect(res.statusCode).toEqual(200);
+    expect(res.status).toEqual(200);
     expect(res.body.message).toEqual(REPSONSE_MESSAGES.LOGIN_OK);
   });
 

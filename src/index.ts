@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 import { seedUserData } from 'src/utils/data';
 
-import app from './src/app';
+import app from './app';
 import { establishConnectionToDatabase } from './mongo';
 
 dotenv.config();
