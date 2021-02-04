@@ -1,9 +1,10 @@
+import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { REPSONSE_MESSAGES } from 'src/constants';
 import { encryptPassword } from 'src/utils/encrypt';
 import { User } from 'src/models/user';
 
-async function login(req, res) {
+async function login(req: Request, res: Response) {
   const { login = '', password = '' } = req.body;
 
   if (!login || !password) {
@@ -23,7 +24,7 @@ async function login(req, res) {
 
     const { salt, password: storedPassword, type } = user;
     const passwordToCheck = encryptPassword(password, salt);
-    
+
     if (passwordToCheck !== storedPassword) {
       return res
         .status(400)
