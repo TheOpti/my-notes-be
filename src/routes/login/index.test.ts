@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { REPSONSE_MESSAGES } from 'src/constants';
+import { RESPONSE_MESSAGES } from 'src/constants';
 import { User } from 'src/models/user';
 import { encryptPassword } from 'src/utils/encrypt';
 import app from '../../app';
@@ -11,7 +11,7 @@ describe('/login endpoint', () => {
       .send({ });
 
     expect(res.status).toEqual(400);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.INCORRECT_DATA);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.INCORRECT_DATA);
   });
 
   it('should return 404 when no user is found', async () => {
@@ -25,7 +25,7 @@ describe('/login endpoint', () => {
       .send({ login: 'non-existing', password: 'foo' });
 
     expect(res.status).toEqual(404);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.NO_USER_WITH_LOGIN);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.NO_USER_WITH_LOGIN);
   });
 
   it('should return 500 when there would be an error with database', async () => {
@@ -39,7 +39,7 @@ describe('/login endpoint', () => {
       .send({ login: 'doesntMatter', password: 'foo' });
 
     expect(res.status).toEqual(500);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.SERVER_ERROR);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.SERVER_ERROR);
   });
 
   it('should return 400 when credentials are not correct', async () => {
@@ -55,7 +55,7 @@ describe('/login endpoint', () => {
       .send({ login: 'user', password: 'otherPassword' });
 
     expect(res.status).toEqual(400);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.LOGIN_PASS_INCORRECT);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.LOGIN_PASS_INCORRECT);
   });
 
   it('should return 200 and correct token when user credentials are correct', async () => {
@@ -76,7 +76,7 @@ describe('/login endpoint', () => {
       .send({ login: 'user', password });
 
     expect(res.status).toEqual(200);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.LOGIN_OK);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.LOGIN_OK);
   });
 
   afterEach(() => {
