@@ -1,8 +1,9 @@
+import { Request, Response } from 'express';
 import { encryptPassword, generateSalt } from 'src/utils/encrypt';
 import { USER_TYPES, REPSONSE_MESSAGES } from 'src/constants';
 import { User } from 'src/models/user';
 
-async function register(req, res) {
+async function register(req: Request, res: Response) {
   const { login, email, password, repeatedPassword } = req.body;
 
   const passwordOk = password && repeatedPassword && password === repeatedPassword
