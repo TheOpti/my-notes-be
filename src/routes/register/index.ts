@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { encryptPassword, generateSalt } from 'src/utils/encrypt';
-import { USER_TYPES, REPSONSE_MESSAGES } from 'src/constants';
+import { USER_TYPES, RESPONSE_MESSAGES } from 'src/constants';
 import { User } from 'src/models/user';
 
 async function register(req: Request, res: Response) {
@@ -12,7 +12,7 @@ async function register(req: Request, res: Response) {
   if (!credentialsCorrect) {
     return res
       .status(400)
-      .send({ message: REPSONSE_MESSAGES.INCORRECT_DATA });
+      .send({ message: RESPONSE_MESSAGES.INCORRECT_DATA });
   }
 
   try {
@@ -21,7 +21,7 @@ async function register(req: Request, res: Response) {
     if (user) {
       return res
         .status(409)
-        .send({ message: REPSONSE_MESSAGES.USER_EXISTS });
+        .send({ message: RESPONSE_MESSAGES.USER_EXISTS });
     }
 
     const salt = generateSalt();
@@ -39,16 +39,16 @@ async function register(req: Request, res: Response) {
     if (!createdUser) {
       return res
         .status(409)
-        .send({ message: REPSONSE_MESSAGES.USER_EXISTS });
+        .send({ message: RESPONSE_MESSAGES.USER_EXISTS });
     }
 
     return res
       .status(200)
-      .send({ message: REPSONSE_MESSAGES.ACCOUNT_CREATED });
+      .send({ message: RESPONSE_MESSAGES.ACCOUNT_CREATED });
   } catch (error) {
     return res
       .status(500)
-      .send({ message: REPSONSE_MESSAGES.SERVER_ERROR });
+      .send({ message: RESPONSE_MESSAGES.SERVER_ERROR });
   }
 }
 

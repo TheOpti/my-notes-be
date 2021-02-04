@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { REPSONSE_MESSAGES } from 'src/constants';
+import { RESPONSE_MESSAGES } from 'src/constants';
 import { User } from 'src/models/user';
 import app from '../../app';
 
@@ -18,7 +18,7 @@ describe('/register endpoint', () => {
       .send({});
 
     expect(res.status).toEqual(400);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.INCORRECT_DATA);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.INCORRECT_DATA);
   });
 
   it('should return 500 when there would be an error with database', async () => {
@@ -32,7 +32,7 @@ describe('/register endpoint', () => {
       .send(userToCreate);
 
     expect(res.status).toEqual(500);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.SERVER_ERROR);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.SERVER_ERROR);
   });
 
   it('should return 409 and info that user already exists', async () => {
@@ -46,7 +46,7 @@ describe('/register endpoint', () => {
       .send(userToCreate);
 
     expect(res.status).toEqual(409);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.USER_EXISTS);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.USER_EXISTS);
   });
 
   it('should return another 409 when there will be attempt to save it in database', async () => {
@@ -63,7 +63,7 @@ describe('/register endpoint', () => {
       .send(userToCreate);
 
     expect(res.status).toEqual(409);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.USER_EXISTS);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.USER_EXISTS);
   });
 
   it('should return 200 when user would be successfully saved to database', async () => {
@@ -80,7 +80,7 @@ describe('/register endpoint', () => {
       .send(userToCreate);
 
     expect(res.status).toEqual(200);
-    expect(res.body.message).toEqual(REPSONSE_MESSAGES.ACCOUNT_CREATED);
+    expect(res.body.message).toEqual(RESPONSE_MESSAGES.ACCOUNT_CREATED);
   });
 
   afterEach(() => {

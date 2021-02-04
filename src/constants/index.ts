@@ -4,7 +4,7 @@ export const USER_TYPES = {
   ADMIN: 'admin',
 }
 
-export const REPSONSE_MESSAGES = {
+export const RESPONSE_MESSAGES = {
   // 200 - OK
   LOGIN_OK: 'Logged successfully',
   ACCOUNT_CREATED: 'Your account was created succesfully. You can now login.',
@@ -16,7 +16,7 @@ export const REPSONSE_MESSAGES = {
   NO_USER_WITH_LOGIN: 'There is no user with given login',
   LOGIN_PASS_INCORRECT: 'Incorrect login or password',
   YOU_NEED_LOGIN: 'You need to Login',
-  
+
   // 500 - server errors
   SERVER_ERROR: 'There was an error during request. Please, try again later.',
 }
