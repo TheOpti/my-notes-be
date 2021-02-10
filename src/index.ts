@@ -7,14 +7,14 @@ import { establishConnectionToDatabase } from './mongo';
 dotenv.config();
 
 app.listen(3000, () => {
-  console.log('Application listening on port 3000');
+	console.log('Application listening on port 3000');
 
-  try {
+	try {
 		establishConnectionToDatabase();
 	} catch (e) {
 		console.group('Connecting to database:');
-  	console.warn('Could not establish connection.');
-  	console.warn('Reason:', e.message);
+		console.warn('Could not establish connection.');
+		console.warn('Reason:', e.message);
 		console.groupEnd();
 	}
 });
