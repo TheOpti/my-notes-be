@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { RESPONSE_MESSAGES } from 'src/constants';
+import { RESPONSE_MESSAGES } from '@constants';
 
 async function logout(_: Request, res: Response) {
   res

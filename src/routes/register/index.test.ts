@@ -1,6 +1,6 @@
 import request from 'supertest';
-import { RESPONSE_MESSAGES } from 'src/constants';
-import { User } from 'src/models/user';
+import { RESPONSE_MESSAGES } from '@constants';
+import { User } from '@models/user';
 import app from '../../app';
 
 
