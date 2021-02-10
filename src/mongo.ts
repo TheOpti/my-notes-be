@@ -5,17 +5,15 @@ function establishConnectionToDatabase() {
 		throw new Error('Database URI not provided. Could not connect to database.');
 	}
 
-  mongoose.connect(process.env.DATABASE_URL || '', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-   });
+	mongoose.connect(process.env.DATABASE_URL || '', {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	});
 
-  const db = mongoose.connection;
+	const db = mongoose.connection;
 
-  db.on('error', (error) => `Error during connecting to DB: ${error}`);
-  db.once('open', () => console.log('Connected to Mongo database'));
+	db.on('error', (error) => `Error during connecting to DB: ${error}`);
+	db.once('open', () => console.log('Connected to Mongo database'));
 }
 
-export {
-  establishConnectionToDatabase,
-}
+export { establishConnectionToDatabase };
