@@ -1,14 +1,15 @@
+import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { REPSONSE_MESSAGES } from '../constants';
+import { RESPONSE_MESSAGES } from '@constants';
 
-function allowAuthentication(req, res, next) {
+function allowAuthentication(req: Request, res: Response, next: () => void) {
   const token = req.cookies.token || '';
 
   try {
     if (!token) {
       return res
         .status(401)
-        .send({ message: REPSONSE_MESSAGES.YOU_NEED_LOGIN });
+        .send({ message: RESPONSE_MESSAGES.YOU_NEED_LOGIN });
     }
 
     const decrypt = jwt.verify(token, 'RESTFULAPIs');
@@ -19,7 +20,7 @@ function allowAuthentication(req, res, next) {
     return res
       .status(500)
       .send({
-        message: REPSONSE_MESSAGES.SERVER_ERROR,
+        message: RESPONSE_MESSAGES.SERVER_ERROR,
         error: err,
       });
   }
