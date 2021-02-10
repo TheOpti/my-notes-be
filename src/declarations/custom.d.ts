@@ -1,5 +1,6 @@
 declare namespace Express {
 	export interface Request {
-		user?: string | object
+		// eslint-disable-next-line
+		user?: string | object;
 	}
 }
