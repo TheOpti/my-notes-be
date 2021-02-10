@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { RESPONSE_MESSAGES } from 'src/constants';
-import { encryptPassword } from 'src/utils/encrypt';
-import { User } from 'src/models/user';
+import { RESPONSE_MESSAGES } from '@constants';
+import { encryptPassword } from '@utils/encrypt';
+import { User } from '@models/user';
 
 async function login(req: Request, res: Response) {
   const { login = '', password = '' } = req.body;

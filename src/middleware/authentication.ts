@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { RESPONSE_MESSAGES } from '../constants';
+import { RESPONSE_MESSAGES } from '@constants';
 
 function allowAuthentication(req: Request, res: Response, next: () => void) {
   const token = req.cookies.token || '';

@@ -1,7 +1,7 @@
 import request from 'supertest';
-import { RESPONSE_MESSAGES } from 'src/constants';
-import { User } from 'src/models/user';
-import { encryptPassword } from 'src/utils/encrypt';
+import { RESPONSE_MESSAGES } from '@constants';
+import { User } from '@models/user';
+import { encryptPassword } from '@utils/encrypt';
 import app from '../../app';
 
 describe('/login endpoint', () => {
