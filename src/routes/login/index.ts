@@ -5,46 +5,38 @@ import { encryptPassword } from '@utils/encrypt';
 import { User } from '@models/user';
 
 async function login(req: Request, res: Response) {
-  const { login = '', password = '' } = req.body;
+	const { login = '', password = '' } = req.body;
 
-  if (!login || !password) {
-    return res
-      .status(400)
-      .send({ message: RESPONSE_MESSAGES.INCORRECT_DATA });
-  }
+	if (!login || !password) {
+		return res.status(400).send({ message: RESPONSE_MESSAGES.INCORRECT_DATA });
+	}
 
-  try {
-    const user = await User.findOne({ login }, 'login password salt type').exec();
+	try {
+		const user = await User.findOne({ login }, 'login password salt type').exec();
 
-    if (!user) {
-      return res
-        .status(404)
-        .send({ message: RESPONSE_MESSAGES.NO_USER_WITH_LOGIN });
-    }
+		if (!user) {
+			return res.status(404).send({ message: RESPONSE_MESSAGES.NO_USER_WITH_LOGIN });
+		}
 
-    const { salt, password: storedPassword, type } = user;
-    const passwordToCheck = encryptPassword(password, salt);
+		const { salt, password: storedPassword, type } = user;
+		const passwordToCheck = encryptPassword(password, salt);
 
-    if (passwordToCheck !== storedPassword) {
-      return res
-        .status(400)
-        .send({ message: RESPONSE_MESSAGES.LOGIN_PASS_INCORRECT });
-    }
+		if (passwordToCheck !== storedPassword) {
+			return res.status(400).send({ message: RESPONSE_MESSAGES.LOGIN_PASS_INCORRECT });
+		}
 
-    const token = jwt.sign({ login, type }, 'RESTFULAPIs');
-    return res
-      .status(200)
-      .cookie('token', token, {
-        expires: new Date(Date.now() + 604800000),
-        secure: false,
-        httpOnly: true,
-      })
-      .send({ message: RESPONSE_MESSAGES.LOGIN_OK });
-  } catch (error) {
-    return res
-      .status(500)
-      .send({ message: RESPONSE_MESSAGES.SERVER_ERROR });
-  }
+		const token = jwt.sign({ login, type }, 'RESTFULAPIs');
+		return res
+			.status(200)
+			.cookie('token', token, {
+				expires: new Date(Date.now() + 604800000),
+				secure: false,
+				httpOnly: true,
+			})
+			.send({ message: RESPONSE_MESSAGES.LOGIN_OK });
+	} catch (error) {
+		return res.status(500).send({ message: RESPONSE_MESSAGES.SERVER_ERROR });
+	}
 }
 
 export default login;
