@@ -10,8 +10,8 @@ export const RESPONSE_MESSAGES = {
 	LOG_OUT_OK: 'Succesfully logged out from the application.',
 
 	// 400 - user errors
-	USER_EXISTS: 'User already exists. You have to select another email or login.',
-	INCORRECT_DATA: 'Incorrect data. Chech if all fields are filled correctly.',
+	USER_EXISTS: 'This login/email is already taken.',
+	INCORRECT_DATA: 'Please check if all fields are filled correctly.',
 	NO_USER_WITH_LOGIN: 'There is no user with given login',
 	LOGIN_PASS_INCORRECT: 'Incorrect login or password',
 	YOU_NEED_LOGIN: 'You need to Login',
