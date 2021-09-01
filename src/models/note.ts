@@ -9,8 +9,10 @@ const noteSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'User',
 	},
+	type: String,
 	color: String,
 	created: String,
+	pinned: Boolean,
 	deleted: Boolean,
 	archived: Boolean,
 });
