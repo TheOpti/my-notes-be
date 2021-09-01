@@ -10,7 +10,7 @@ function allowAuthentication(req: Request, res: Response, next: () => void) {
 			return res.status(401).send({ message: RESPONSE_MESSAGES.YOU_NEED_LOGIN });
 		}
 
-		const decrypt = jwt.verify(token, 'RESTFULAPIs');
+		const decrypt: any = jwt.verify(token, 'RESTFULAPIs');
 		req.user = decrypt;
 
 		next();

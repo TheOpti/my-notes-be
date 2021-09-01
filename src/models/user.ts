@@ -13,6 +13,12 @@ const userSchema = new Schema({
 		unique: true,
 	},
 	type: String,
+	notes: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Note',
+		}
+	]
 });
 
 const userModel = mongoose.model('User', userSchema);
