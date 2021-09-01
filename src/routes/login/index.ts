@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { RESPONSE_MESSAGES } from '@constants';
 import { encryptPassword } from '@utils/encrypt';
-import { User } from '@models/user';
+import { User, UserDocumentType } from '@models/user';
 
 async function login(req: Request, res: Response) {
 	const { login = '', password = '' } = req.body;
@@ -12,7 +12,7 @@ async function login(req: Request, res: Response) {
 	}
 
 	try {
-		const user = await User.findOne({ login }, 'login password salt type').exec();
+		const user: UserDocumentType = await User.findOne({ login }, 'login password salt type').exec();
 
 		if (!user) {
 			return res.status(404).send({ message: RESPONSE_MESSAGES.NO_USER_WITH_LOGIN });

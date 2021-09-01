@@ -33,7 +33,7 @@
     "@babel/runtime": "^7.12.5",
     "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.11",
-    "@types/jest": "^26.0.20",
+    "@types/jest": "^27.0.1",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/mongoose": "^5.10.3",
     "@types/morgan": "^1.9.2",
@@ -44,10 +44,11 @@
     "concurrently": "^5.3.0",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
-    "jest": "^26.6.3",
+    "jest": "^27.1.0",
     "nodemon": "^2.0.7",
     "prettier": "2.2.1",
     "supertest": "^6.1.3",
+    "ts-jest": "^27.0.5",
     "typescript": "^4.1.3"
   },
   "_moduleAliases": {

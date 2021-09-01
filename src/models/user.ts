@@ -1,7 +1,19 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
+export interface UserDocumentType extends Document {
+	login: string,
+	password: string,
+	salt: string,
+	email: string,
+	type: string,
+	notes: [{
+		type: string,
+		ref: 'Note',
+	}],
+}
+
+const userSchema = new Schema<UserDocumentType>({
 	login: {
 		type: String,
 		unique: true,
