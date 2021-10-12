@@ -29,42 +29,42 @@ describe('/register endpoint', () => {
 		expect(res.body.message).toEqual(RESPONSE_MESSAGES.SERVER_ERROR);
 	});
 
-	// it('should return 409 and info that user already exists', async () => {
-	// 	jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-	// 		exec: () => Promise.resolve(userToCreate),
-	// 	}));
-	//
-	// 	const res = await request(app).post('/register').send(userToCreate);
-	//
-	// 	expect(res.status).toEqual(409);
-	// 	expect(res.body.message).toEqual(RESPONSE_MESSAGES.USER_EXISTS);
-	// });
-	//
-	// it('should return another 409 when there will be attempt to save it in database', async () => {
-	// 	jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-	// 		exec: () => null,
-	// 	}));
-	//
-	// 	jest.spyOn(User, 'create').mockImplementationOnce(() => null);
-	//
-	// 	const res = await request(app).post('/register').send(userToCreate);
-	//
-	// 	expect(res.status).toEqual(409);
-	// 	expect(res.body.message).toEqual(RESPONSE_MESSAGES.USER_EXISTS);
-	// });
-	//
-	// it('should return 200 when user would be successfully saved to database', async () => {
-	// 	jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-	// 		exec: () => null,
-	// 	}));
-	//
-	// 	jest.spyOn(User, 'create').mockImplementationOnce(() => userToCreate);
-	//
-	// 	const res = await request(app).post('/register').send(userToCreate);
-	//
-	// 	expect(res.status).toEqual(200);
-	// 	expect(res.body.message).toEqual(RESPONSE_MESSAGES.ACCOUNT_CREATED);
-	// });
+	it('should return 409 and info that user already exists', async () => {
+		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
+			exec: () => Promise.resolve(userToCreate),
+		}));
+
+		const res = await request(app).post('/register').send(userToCreate);
+
+		expect(res.status).toEqual(409);
+		expect(res.body.message).toEqual(RESPONSE_MESSAGES.USER_EXISTS);
+	});
+
+	it('should return another 409 when there will be attempt to save it in database', async () => {
+		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
+			exec: () => null,
+		}));
+
+		jest.spyOn(User, 'create').mockImplementationOnce(() => null);
+
+		const res = await request(app).post('/register').send(userToCreate);
+
+		expect(res.status).toEqual(409);
+		expect(res.body.message).toEqual(RESPONSE_MESSAGES.USER_EXISTS);
+	});
+
+	it('should return 200 when user would be successfully saved to database', async () => {
+		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
+			exec: () => null,
+		}));
+
+		jest.spyOn(User, 'create').mockImplementationOnce(() => userToCreate);
+
+		const res = await request(app).post('/register').send(userToCreate);
+
+		expect(res.status).toEqual(200);
+		expect(res.body.message).toEqual(RESPONSE_MESSAGES.ACCOUNT_CREATED);
+	});
 
 	afterEach(() => {
 		jest.restoreAllMocks();

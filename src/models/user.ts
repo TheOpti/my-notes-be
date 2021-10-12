@@ -5,11 +5,14 @@ export interface UserDocumentType extends Document {
 	login: string,
 	password: string,
 	salt: string,
-	email: string,
+	email: {
+		type: string,
+		unique: boolean,
+	},
 	type: string,
 	notes: [{
 		type: string,
-		ref: 'Note',
+		ref: string,
 	}],
 }
 
