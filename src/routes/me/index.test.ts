@@ -15,7 +15,7 @@ describe('/me endpoint', () => {
 		const res = await request(app).get('/me').send({});
 
 		expect(res.status).toEqual(401);
-		expect(res.body.message).toEqual(RESPONSE_MESSAGES.YOU_NEED_LOGIN);
+		expect(res.body).toEqual({ message: RESPONSE_MESSAGES.YOU_NEED_LOGIN });
 	});
 
 	it('should return 500 when token is incorrect', async () => {
