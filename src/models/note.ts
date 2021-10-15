@@ -1,7 +1,23 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const noteSchema = new Schema({
+export interface NoteDocumentType extends Document {
+	id: string;
+	title: string;
+	description: string;
+	owner: {
+		type: string;
+		ref: string;
+	};
+	type: string;
+	color: string;
+	created: string;
+	pinned: boolean;
+	deleted: boolean;
+	archived: boolean;
+}
+
+const noteSchema = new Schema<NoteDocumentType>({
 	id: String,
 	title: String,
 	description: String,

@@ -14,10 +14,9 @@ function allowAuthentication(req: Request, res: Response, next: () => void) {
 		req.user = decrypt;
 
 		next();
-	} catch (err) {
+	} catch (_) {
 		return res.status(500).send({
 			message: RESPONSE_MESSAGES.SERVER_ERROR,
-			error: err,
 		});
 	}
 }

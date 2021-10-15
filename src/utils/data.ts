@@ -15,7 +15,7 @@ function seedUserData(): void {
 	};
 
 	const createdUser = new User(user1);
-	createdUser.save((err) => {
+	createdUser.save((err: Error) => {
 		if (err) {
 			console.log(`Error during saving: ${err}`);
 		} else {
