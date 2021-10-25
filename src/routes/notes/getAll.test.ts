@@ -12,7 +12,7 @@ jest.mock('jsonwebtoken', () => ({
 	},
 }));
 
-describe('/notes endpoint', () => {
+describe('/notes - getAll', () => {
 	it('should return 401 when no token is provided', async () => {
 		const res = await request(app).get('/notes').send({});
 
