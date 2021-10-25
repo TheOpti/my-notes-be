@@ -16,7 +16,7 @@ describe('/login endpoint', () => {
 		jest.spyOn(User, 'findOne').mockImplementationOnce(
 			() =>
 				({
-					exec: (): any => Promise.resolve(null),
+					exec: (): Promise<null> => Promise.resolve(null),
 				} as any)
 		);
 
@@ -30,7 +30,7 @@ describe('/login endpoint', () => {
 		jest.spyOn(User, 'findOne').mockImplementationOnce(
 			() =>
 				({
-					exec: (): any => Promise.reject('Error'),
+					exec: (): Promise<Error> => Promise.reject('Error'),
 				} as any)
 		);
 
