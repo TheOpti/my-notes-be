@@ -19,9 +19,12 @@ describe('/register endpoint', () => {
 	});
 
 	it('should return 500 when there would be an error with database', async () => {
-		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-			exec: () => Promise.reject('Error'),
-		} as any));
+		jest.spyOn(User, 'findOne').mockImplementationOnce(
+			() =>
+				({
+					exec: () => Promise.reject('Error'),
+				} as any)
+		);
 
 		const res = await request(app).post('/register').send(userToCreate);
 

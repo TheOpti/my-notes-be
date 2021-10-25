@@ -13,9 +13,12 @@ describe('/login endpoint', () => {
 	});
 
 	it('should return 404 when no user is found', async () => {
-		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-			exec: (): any => Promise.resolve(null),
-		} as any));
+		jest.spyOn(User, 'findOne').mockImplementationOnce(
+			() =>
+				({
+					exec: (): any => Promise.resolve(null),
+				} as any)
+		);
 
 		const res = await request(app).post('/login').send({ login: 'non-existing', password: 'foo' });
 
@@ -24,9 +27,12 @@ describe('/login endpoint', () => {
 	});
 
 	it('should return 500 when there would be an error with database', async () => {
-		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-			exec: (): any => Promise.reject('Error'),
-		} as any));
+		jest.spyOn(User, 'findOne').mockImplementationOnce(
+			() =>
+				({
+					exec: (): any => Promise.reject('Error'),
+				} as any)
+		);
 
 		const res = await request(app).post('/login').send({ login: 'doesntMatter', password: 'foo' });
 
@@ -35,14 +41,17 @@ describe('/login endpoint', () => {
 	});
 
 	it('should return 400 when credentials are not correct', async () => {
-		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-			exec: (): any =>
-				Promise.resolve({
-					user: 'user',
-					password: 'pass',
-					salt: 'salt',
-				}),
-		} as any));
+		jest.spyOn(User, 'findOne').mockImplementationOnce(
+			() =>
+				({
+					exec: (): any =>
+						Promise.resolve({
+							user: 'user',
+							password: 'pass',
+							salt: 'salt',
+						}),
+				} as any)
+		);
 
 		const res = await request(app).post('/login').send({ login: 'user', password: 'otherPassword' });
 
@@ -56,14 +65,17 @@ describe('/login endpoint', () => {
 
 		const encryptedPassToStore = encryptPassword(password, salt);
 
-		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-			exec: (): any =>
-				Promise.resolve({
-					user: 'user',
-					password: encryptedPassToStore,
-					salt,
-				}),
-		} as any));
+		jest.spyOn(User, 'findOne').mockImplementationOnce(
+			() =>
+				({
+					exec: (): any =>
+						Promise.resolve({
+							user: 'user',
+							password: encryptedPassToStore,
+							salt,
+						}),
+				} as any)
+		);
 
 		const res = await request(app).post('/login').send({ login: 'user', password });
 
