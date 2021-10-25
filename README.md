@@ -2,6 +2,14 @@
 
 This is backend part of the "My notes" application.
 
+## Tests
+
+In order to run unit tests, please type:
+
+```
+npm run test
+```
+
 ## Database
 
 Database is created with MongoDB. In order to run database locally, you can either install

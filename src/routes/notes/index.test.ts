@@ -8,7 +8,7 @@ jest.mock('jsonwebtoken', () => ({
 	...jest.requireActual('jsonwebtoken'),
 	verify: (tokenValue: string) => {
 		if (tokenValue === 'Incorrect') throw new Error();
-		return { foo: 'bar' }
+		return { foo: 'bar' };
 	},
 }));
 
@@ -25,9 +25,12 @@ describe('/notes endpoint', () => {
 	});
 
 	it('should return 500 when there would be an error with database', async () => {
-		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-			exec: (): any => Promise.reject('Error'),
-		} as any));
+		jest.spyOn(User, 'findOne').mockImplementationOnce(
+			() =>
+				({
+					exec: (): any => Promise.reject('Error'),
+				} as any)
+		);
 
 		const res = await request(app).get('/notes').set('Cookie', ['token=Correct']).send({});
 
@@ -36,13 +39,19 @@ describe('/notes endpoint', () => {
 	});
 
 	it('should correctly return list of notes for given user', async () => {
-		jest.spyOn(User, 'findOne').mockImplementationOnce(() => ({
-			exec: (): any => Promise.resolve('userId'),
-		} as any));
+		jest.spyOn(User, 'findOne').mockImplementationOnce(
+			() =>
+				({
+					exec: (): any => Promise.resolve('userId'),
+				} as any)
+		);
 
-		jest.spyOn(Note, 'find').mockImplementationOnce(() => ({
-			exec: (): any => Promise.resolve([]),
-		} as any));
+		jest.spyOn(Note, 'find').mockImplementationOnce(
+			() =>
+				({
+					exec: (): any => Promise.resolve([]),
+				} as any)
+		);
 
 		const res = await request(app).get('/notes').set('Cookie', ['token=Correct']).send({});
 
